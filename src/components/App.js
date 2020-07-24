@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { handleInitialData } from "./../actions/shared";
 import { Row, Col, Collection, CollectionItem } from "react-materialize";
 import NavBar from "./NavBar";
+import Login from "./Login";
 
 export class App extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ export class App extends Component {
     return (
       <div>
         <NavBar />
+        <Login />
         {authUser && (
           <div className="container">
             <h1 className="center">{authUser}</h1>
