@@ -15,7 +15,7 @@ export class App extends Component {
     return (
       <div>
         <NavBar />
-        <Login />
+        {!authUser && <Login />}
         {authUser && (
           <div className="container">
             <h1 className="center">{authUser}</h1>

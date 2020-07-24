@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Row, Col, Collection, CollectionItem } from "react-materialize";
+import { Row, Col, Collection } from "react-materialize";
+import User from "./User";
 
 export class Login extends Component {
   render() {
@@ -8,10 +9,10 @@ export class Login extends Component {
     return (
       <Row className="container">
         <h3>LOGIN</h3>
-        <Col s={12}>
+        <Col s={6} className="offset-s3">
           <Collection>
             {userIds.map((id) => (
-              <CollectionItem key={id}>{id}</CollectionItem>
+              <User key={id} id={id} />
             ))}
           </Collection>
         </Col>

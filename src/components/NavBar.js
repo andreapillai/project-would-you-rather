@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Navbar, NavItem, Icon } from "react-materialize";
+import { setAuthUser } from "../actions/authUser";
 
 export class NavBar extends Component {
   render() {
-    const { authUser } = this.props;
+    const { dispatch, authUser } = this.props;
     return (
       <Navbar
         alignLinks="right"
@@ -31,7 +32,14 @@ export class NavBar extends Component {
       >
         <NavItem href="#">Dashboard</NavItem>
         <NavItem href="#">Leaderboard</NavItem>
-        {authUser && <button className="btn indigo">Log Out</button>}
+        {authUser && (
+          <button
+            className="btn indigo"
+            onClick={() => dispatch(setAuthUser(null))}
+          >
+            Log Out
+          </button>
+        )}
       </Navbar>
     );
   }
