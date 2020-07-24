@@ -4,6 +4,7 @@ import { Navbar, NavItem, Icon } from "react-materialize";
 
 export class NavBar extends Component {
   render() {
+    const { authUser } = this.props;
     return (
       <Navbar
         alignLinks="right"
@@ -26,13 +27,18 @@ export class NavBar extends Component {
           outDuration: 200,
           preventScrolling: true,
         }}
-        className="indigo darken-4"
+        className={authUser ? "indigo darken-4" : "grey"}
       >
-        <NavItem href="">Getting started</NavItem>
-        <NavItem href="components.html">Components</NavItem>
+        <NavItem href="#">Dashboard</NavItem>
+        <NavItem href="#">Leaderboard</NavItem>
+        {authUser && <button className="btn indigo">Log Out</button>}
       </Navbar>
     );
   }
 }
 
-export default connect()(NavBar);
+function mapStateToProps({ authUser }) {
+  return { authUser };
+}
+
+export default connect(mapStateToProps)(NavBar);
