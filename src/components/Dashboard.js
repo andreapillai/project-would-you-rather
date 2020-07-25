@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Tabs, Tab, Row, Col } from "react-materialize";
+import { Link } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
 
 export class Dashboard extends Component {
@@ -24,7 +25,9 @@ export class Dashboard extends Component {
               <div className="center">
                 <h3>You have no unanswered questions!</h3>
                 <p>Why not add one?</p>
-                <button className="btn indigo">Click here!</button>
+                <Link to="/new">
+                  <button className="btn indigo">Click here!</button>
+                </Link>
               </div>
             ) : (
               <Row>
