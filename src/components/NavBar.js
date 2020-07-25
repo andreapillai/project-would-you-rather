@@ -32,7 +32,8 @@ export class NavBar extends Component {
         className={authUser ? "indigo darken-4" : "grey"}
       >
         <NavLink to="/">Dashboard</NavLink>
-        <NavLink to="leaderboard">Leaderboard</NavLink>
+        <NavLink to="/leaderboard">Leaderboard</NavLink>
+        <NavLink to="/new">New Question</NavLink>
         {authUser && (
           <button
             className="btn indigo"
