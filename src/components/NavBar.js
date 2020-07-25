@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
-import { Navbar, NavItem, Icon } from "react-materialize";
+import { Navbar, Icon } from "react-materialize";
 import { setAuthUser } from "../actions/authUser";
 
 export class NavBar extends Component {
