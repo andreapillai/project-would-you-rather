@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardTitle, Collection, CollectionItem } from "react-materialize";
 import { addAnswerToUser } from "../actions/users";
+import { addAnswerToQuestion } from "../actions/questions";
 
 export class QuestionCard extends Component {
   render() {
@@ -28,10 +29,14 @@ export class QuestionCard extends Component {
           <CollectionItem
             onClick={
               !answered
-                ? () =>
+                ? () => {
                     dispatch(
                       addAnswerToUser(authUser, question.id, "optionOne")
-                    )
+                    );
+                    dispatch(
+                      addAnswerToQuestion(authUser, question.id, "optionOne")
+                    );
+                  }
                 : null
             }
             className={answer === "optionOne" ? "indigo lighten-4" : ""}
@@ -42,10 +47,14 @@ export class QuestionCard extends Component {
           <CollectionItem
             onClick={
               !answered
-                ? () =>
+                ? () => {
                     dispatch(
                       addAnswerToUser(authUser, question.id, "optionTwo")
-                    )
+                    );
+                    dispatch(
+                      addAnswerToQuestion(authUser, question.id, "optionTwo")
+                    );
+                  }
                 : null
             }
             className={answer === "optionTwo" ? "indigo lighten-4" : ""}
