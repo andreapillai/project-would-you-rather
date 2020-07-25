@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Leaderboard from "./Leaderboard";
+import NewQuestion from "./NewQuestion";
 
 export class App extends Component {
   componentDidMount() {
@@ -23,6 +24,7 @@ export class App extends Component {
             <div className="container">
               <Route exact path="/" component={Dashboard} />
               <Route path="/leaderboard" component={Leaderboard} />
+              <Route path="/new" component={NewQuestion} />
             </div>
           )}
         </div>
