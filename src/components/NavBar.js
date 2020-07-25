@@ -38,7 +38,7 @@ export class NavBar extends Component {
             className="btn indigo"
             onClick={() => dispatch(setAuthUser(null))}
           >
-            Log Out
+            {authUser} - Log Out
           </button>
         )}
       </Navbar>
