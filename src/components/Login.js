@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Collection } from "react-materialize";
-import User from "./User";
+import User from "./UserListItem";
 
 export class Login extends Component {
   render() {
