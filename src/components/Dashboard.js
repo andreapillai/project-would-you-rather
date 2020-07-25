@@ -7,7 +7,7 @@ export class Dashboard extends Component {
   render() {
     const { answeredQuestions, unansweredQuestions } = this.props;
     return (
-      <div className="container">
+      <div>
         <h1 className="center">Dashboard</h1>
         <Tabs className="tab-demo z-depth-1 tabs-fixed-width">
           <Tab
@@ -20,13 +20,21 @@ export class Dashboard extends Component {
             }}
             title={`Unanswered: ${unansweredQuestions.length}`}
           >
-            <Row>
-              <Col s={12}>
-                {unansweredQuestions.map((q) => (
-                  <QuestionCard key={q.id} id={q.id} />
-                ))}
-              </Col>
-            </Row>
+            {unansweredQuestions.length === 0 ? (
+              <div className="center">
+                <h3>You have no unanswered questions!</h3>
+                <p>Why not add one?</p>
+                <button className="btn indigo">Click here!</button>
+              </div>
+            ) : (
+              <Row>
+                <Col s={12}>
+                  {unansweredQuestions.map((q) => (
+                    <QuestionCard key={q.id} id={q.id} />
+                  ))}
+                </Col>
+              </Row>
+            )}
           </Tab>
           <Tab
             options={{
