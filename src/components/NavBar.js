@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink, Link } from "react-router-dom";
 import { Navbar, NavItem, Icon } from "react-materialize";
 import { setAuthUser } from "../actions/authUser";
 
@@ -10,9 +11,9 @@ export class NavBar extends Component {
       <Navbar
         alignLinks="right"
         brand={
-          <a className="brand-logo" href="#">
+          <Link className="brand-logo" to="/">
             Would You Rather... ?
-          </a>
+          </Link>
         }
         id="mobile-nav"
         menuIcon={<Icon>menu</Icon>}
@@ -30,8 +31,8 @@ export class NavBar extends Component {
         }}
         className={authUser ? "indigo darken-4" : "grey"}
       >
-        <NavItem href="#">Dashboard</NavItem>
-        <NavItem href="#">Leaderboard</NavItem>
+        <NavLink to="/">Dashboard</NavLink>
+        <NavLink to="leaderboard">Leaderboard</NavLink>
         {authUser && (
           <button
             className="btn indigo"

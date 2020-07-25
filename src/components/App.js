@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { BrowserRouter, Route } from "react-router-dom";
 import { handleInitialData } from "./../actions/shared";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
+import Leaderboard from "./Leaderboard";
 
 export class App extends Component {
   componentDidMount() {
@@ -13,15 +15,18 @@ export class App extends Component {
   render() {
     const { authUser } = this.props;
     return (
-      <div>
-        <NavBar />
-        {!authUser && <Login />}
-        {authUser && (
-          <div className="container">
-            <Dashboard />
-          </div>
-        )}
-      </div>
+      <BrowserRouter>
+        <div>
+          <NavBar />
+          {!authUser && <Login />}
+          {authUser && (
+            <div className="container">
+              <Route exact path="/" component={Dashboard} />
+              <Route path="/leaderboard" component={Leaderboard} />
+            </div>
+          )}
+        </div>
+      </BrowserRouter>
     );
   }
 }
