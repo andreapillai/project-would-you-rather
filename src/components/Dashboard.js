@@ -18,7 +18,7 @@ export class Dashboard extends Component {
               responsiveThreshold: Infinity,
               swipeable: false,
             }}
-            title="Unanswered"
+            title={`Unanswered: ${unansweredQuestions.length}`}
           >
             <Row>
               <Col s={12}>
@@ -35,7 +35,7 @@ export class Dashboard extends Component {
               responsiveThreshold: Infinity,
               swipeable: false,
             }}
-            title="Answered"
+            title={`Answered: ${answeredQuestions.length}`}
           >
             <Row>
               <Col s={12}>
