@@ -4,12 +4,12 @@ import UserCard from "./UserCard";
 
 export class Leaderboard extends Component {
   render() {
-    const { userIds } = this.props;
+    const { rankedUserIds } = this.props;
     return (
-      <div>
+      <div className="center">
         <h1>Leaderboard</h1>
-        {userIds.map((id) => (
-          <UserCard key={id} id={id} />
+        {rankedUserIds.map((user) => (
+          <UserCard key={user.id} id={user.id} />
         ))}
       </div>
     );
@@ -17,8 +17,14 @@ export class Leaderboard extends Component {
 }
 
 function mapStateToProps({ users }) {
+  const rankedUserIds = Object.values(users)
+    .map((user) => ({
+      id: user.id,
+      score: Object.values(user.answers).length + user.questions.length,
+    }))
+    .sort((a, b) => b.score - a.score);
   return {
-    userIds: Object.keys(users),
+    rankedUserIds,
   };
 }
 
