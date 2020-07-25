@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Tabs, Tab } from "react-materialize";
+import { Tabs, Tab, Row, Col } from "react-materialize";
+import QuestionCard from "./QuestionCard";
 
 export class Dashboard extends Component {
   render() {
-    const { answeredQuestionIds } = this.props;
+    const { answeredQuestions, unansweredQuestions } = this.props;
     return (
       <div className="container">
         <h1 className="center">Dashboard</h1>
@@ -19,7 +20,13 @@ export class Dashboard extends Component {
             }}
             title="Unanswered"
           >
-            Unanswered
+            <Row>
+              <Col s={12}>
+                {unansweredQuestions.map((q) => (
+                  <QuestionCard key={q.id} id={q.id} />
+                ))}
+              </Col>
+            </Row>
           </Tab>
           <Tab
             options={{
@@ -30,11 +37,13 @@ export class Dashboard extends Component {
             }}
             title="Answered"
           >
-            <ul>
-              {answeredQuestionIds.map((id) => (
-                <li key={id}>{id}</li>
-              ))}
-            </ul>
+            <Row>
+              <Col s={12}>
+                {answeredQuestions.map((q) => (
+                  <QuestionCard key={q.id} id={q.id} answered={true} />
+                ))}
+              </Col>
+            </Row>
           </Tab>
         </Tabs>
       </div>
@@ -42,8 +51,18 @@ export class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ authUser, users, questions }) => ({
-  answeredQuestionIds: Object.keys(users[authUser].answers),
-});
+const mapStateToProps = ({ authUser, users, questions }) => {
+  const answeredQuestionIds = Object.keys(users[authUser].answers);
+  const answeredQuestions = Object.values(questions).filter((question) =>
+    answeredQuestionIds.includes(question.id)
+  );
+  const unansweredQuestions = Object.values(questions).filter(
+    (question) => !answeredQuestionIds.includes(question.id)
+  );
+  return {
+    answeredQuestions,
+    unansweredQuestions,
+  };
+};
 
 export default connect(mapStateToProps)(Dashboard);
