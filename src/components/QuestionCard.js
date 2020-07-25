@@ -28,17 +28,10 @@ export class QuestionCard extends Component {
           <CollectionItem
             onClick={
               !answered
-                ? () => {
-                    // console.log(
-                    //   "Dispatching action from component: ",
-                    //   authUser,
-                    //   question.id,
-                    //   "optionOne"
-                    // );
+                ? () =>
                     dispatch(
                       addAnswerToUser(authUser, question.id, "optionOne")
-                    );
-                  }
+                    )
                 : null
             }
             className={answer === "optionOne" ? "indigo lighten-4" : ""}
@@ -50,7 +43,9 @@ export class QuestionCard extends Component {
             onClick={
               !answered
                 ? () =>
-                    console.log(`Selected option ${question.optionTwo.text}`)
+                    dispatch(
+                      addAnswerToUser(authUser, question.id, "optionTwo")
+                    )
                 : null
             }
             className={answer === "optionTwo" ? "indigo lighten-4" : ""}
