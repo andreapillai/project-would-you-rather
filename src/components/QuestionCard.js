@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardTitle, Collection, CollectionItem } from "react-materialize";
+import { addAnswerToUser } from "../actions/users";
 
 export class QuestionCard extends Component {
   render() {
-    const { question, author, answered, answer } = this.props;
+    const {
+      dispatch,
+      question,
+      author,
+      answered,
+      answer,
+      authUser,
+    } = this.props;
     return (
       <Card
         header={<CardTitle image={author.avatarURL} />}
@@ -20,8 +28,17 @@ export class QuestionCard extends Component {
           <CollectionItem
             onClick={
               !answered
-                ? () =>
-                    console.log(`Selected option ${question.optionOne.text}`)
+                ? () => {
+                    // console.log(
+                    //   "Dispatching action from component: ",
+                    //   authUser,
+                    //   question.id,
+                    //   "optionOne"
+                    // );
+                    dispatch(
+                      addAnswerToUser(authUser, question.id, "optionOne")
+                    );
+                  }
                 : null
             }
             className={answer === "optionOne" ? "indigo lighten-4" : ""}
@@ -56,6 +73,7 @@ const mapStateToProps = ({ questions, users, authUser }, { id, answered }) => {
     author,
     answered,
     answer,
+    authUser,
   };
 };
 
