@@ -7,7 +7,7 @@ export class Login extends Component {
   render() {
     const { userIds } = this.props;
     return (
-      <Row className="container">
+      <Row className="container center">
         <h3>LOGIN</h3>
         <Col s={6} className="offset-s3">
           <Collection>
