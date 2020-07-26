@@ -1,4 +1,4 @@
-import { getInitialData } from "./../utils/api";
+import { getInitialData, saveAnswer } from "./../utils/api";
 import { receiveUsers, addAnswerToUser } from "./users";
 import { receiveQuestions, addAnswerToQuestion } from "./questions";
 import { setAuthUser } from "./authUser";
@@ -17,5 +17,6 @@ export function handleSaveAnswer(authUser, question, answer) {
   return (dispatch) => {
     dispatch(addAnswerToUser(authUser, question, answer));
     dispatch(addAnswerToQuestion(authUser, question, answer));
+    saveAnswer(authUser, question, answer);
   };
 }
