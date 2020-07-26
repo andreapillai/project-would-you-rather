@@ -5,14 +5,12 @@ import {
   addAnswerToQuestion,
   addNewQuestion,
 } from "./questions";
-import { setAuthUser } from "./authUser";
 
 export function handleInitialData() {
   return (dispatch) => {
     return getInitialData().then(({ users, questions }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
-      dispatch(setAuthUser("sarahedo"));
     });
   };
 }
