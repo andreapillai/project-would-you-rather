@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Divider, Button, TextInput } from "react-materialize";
+import { handleAddNewQuestion } from "./../actions/shared";
 
 export class NewQuestion extends Component {
   state = {
@@ -12,9 +13,9 @@ export class NewQuestion extends Component {
     this.setState({ [id]: value });
   };
   handleSubmit = () => {
-    console.log(
-      `Submitting New Question: ${this.state.optionOne} or ${this.state.optionTwo}`
-    );
+    const { dispatch, authUser } = this.props;
+    const { optionOne, optionTwo } = this.state;
+    dispatch(handleAddNewQuestion(optionOne, optionTwo, authUser));
     this.setState({ optionOne: "", optionTwo: "" });
   };
   render() {
@@ -44,6 +45,6 @@ export class NewQuestion extends Component {
   }
 }
 
-const mapStateToProps = ({ authUser }) => ({});
+const mapStateToProps = ({ authUser }) => ({ authUser });
 
 export default connect(mapStateToProps)(NewQuestion);
