@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardTitle, Collection, CollectionItem } from "react-materialize";
-import { addAnswerToUser } from "../actions/users";
-import { addAnswerToQuestion } from "../actions/questions";
+import { handleSaveAnswer } from "../actions/shared";
 
 export class QuestionCard extends Component {
   render() {
@@ -31,10 +30,7 @@ export class QuestionCard extends Component {
               !answered
                 ? () => {
                     dispatch(
-                      addAnswerToUser(authUser, question.id, "optionOne")
-                    );
-                    dispatch(
-                      addAnswerToQuestion(authUser, question.id, "optionOne")
+                      handleSaveAnswer(authUser, question.id, "optionOne")
                     );
                   }
                 : null
@@ -49,10 +45,7 @@ export class QuestionCard extends Component {
               !answered
                 ? () => {
                     dispatch(
-                      addAnswerToUser(authUser, question.id, "optionTwo")
-                    );
-                    dispatch(
-                      addAnswerToQuestion(authUser, question.id, "optionTwo")
+                      handleSaveAnswer(authUser, question.id, "optionTwo")
                     );
                   }
                 : null
