@@ -7,7 +7,7 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Leaderboard from "./Leaderboard";
 import NewQuestion from "./NewQuestion";
-import { QuestionPage } from "./QuestionPage";
+import QuestionPage from "./QuestionPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 export class App extends Component {

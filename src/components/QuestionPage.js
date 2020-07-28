@@ -1,16 +1,63 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { QuestionCard } from "./QuestionCard";
+import { Card, Collection, CollectionItem } from "react-materialize";
+import { CardTitle } from "react-materialize";
 
 export class QuestionPage extends Component {
+  calculateWinner = (optionOnevotes, optionTwovotes) => {
+    if (optionOnevotes === optionTwovotes) return "tie";
+    return optionOnevotes > optionTwovotes ? "optionOne" : "optionTwo";
+  };
   render() {
-    const { id } = this.props.match.params;
+    const { question, author } = this.props;
+    const optionOneVotes = question.optionOne.votes.length;
+    const optionTwoVotes = question.optionTwo.votes.length;
+    const winner = this.calculateWinner(optionOneVotes, optionTwoVotes);
     return (
-      <div>
-        <h1>Question Page - {id}</h1>
-      </div>
+      <Card
+        header={
+          <CardTitle image="https://materializecss.com/images/sample-1.jpg" />
+        }
+        horizontal
+        className="center"
+      >
+        <h3>{winner === "tie" ? "Votes are tied!" : "We have a winner!"}</h3>
+        <Collection>
+          <CollectionItem className="indigo white-text">
+            {`${author.name} asked: `}
+            <br />
+            {`Would you Rather... ?`}
+          </CollectionItem>
+          <CollectionItem
+            className={
+              winner === "tie" || winner === "optionOne"
+                ? "indigo lighten-4"
+                : ""
+            }
+          >
+            {question.optionOne.text} - VOTES: {optionOneVotes}
+          </CollectionItem>
+          <CollectionItem>- or -</CollectionItem>
+          <CollectionItem
+            className={
+              winner === "tie" || winner === "optionTwo"
+                ? "indigo lighten-4"
+                : ""
+            }
+          >
+            {question.optionTwo.text} - VOTES: {optionTwoVotes}
+          </CollectionItem>
+        </Collection>
+      </Card>
     );
   }
 }
 
-export default connect()(QuestionPage);
+function mapStateToProps({ authUser, users, questions }, { match }) {
+  return {
+    question: questions[match.params.id],
+    author: users[questions[match.params.id].author],
+  };
+}
+
+export default connect(mapStateToProps)(QuestionPage);
