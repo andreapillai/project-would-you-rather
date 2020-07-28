@@ -56,11 +56,9 @@ export class QuestionCard extends Component {
             {question.optionTwo.text}
           </CollectionItem>
         </Collection>
-        {answered && (
-          <Link to={`/questions/${question.id}`}>
-            <button className="btn indigo">View Results</button>
-          </Link>
-        )}
+        <Link to={`/questions/${question.id}`}>
+          <button className="btn indigo">View Results</button>
+        </Link>
       </Card>
     );
   }
