@@ -13,6 +13,9 @@ export class QuestionPage extends Component {
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
     const winner = this.calculateWinner(optionOneVotes, optionTwoVotes);
+    const totalVotes = optionOneVotes + optionTwoVotes;
+    const optionOnePercent = Math.round((optionOneVotes * 100) / totalVotes);
+    const optionTwoPercent = Math.round((optionTwoVotes * 100) / totalVotes);
     return (
       <Card
         header={
@@ -35,7 +38,7 @@ export class QuestionPage extends Component {
                 : ""
             }
           >
-            {question.optionOne.text} - VOTES: {optionOneVotes}
+            {`${question.optionOne.text} - VOTES: ${optionOneVotes} - ${optionOnePercent}% of votes.`}
           </CollectionItem>
           <CollectionItem>- or -</CollectionItem>
           <CollectionItem
@@ -45,7 +48,7 @@ export class QuestionPage extends Component {
                 : ""
             }
           >
-            {question.optionTwo.text} - VOTES: {optionTwoVotes}
+            {`${question.optionTwo.text} - VOTES: ${optionTwoVotes} - ${optionTwoPercent}% of votes.`}
           </CollectionItem>
         </Collection>
       </Card>
