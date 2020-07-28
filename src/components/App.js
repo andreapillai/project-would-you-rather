@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { handleInitialData } from "./../actions/shared";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Leaderboard from "./Leaderboard";
 import NewQuestion from "./NewQuestion";
+import { QuestionPage } from "./QuestionPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 export class App extends Component {
   componentDidMount() {
@@ -14,28 +16,25 @@ export class App extends Component {
   }
 
   render() {
-    const { authUser } = this.props;
     return (
       <BrowserRouter>
         <div>
           <NavBar />
-          {!authUser && <Login />}
-          {authUser && (
-            <div className="container">
-              <Route exact path="/" component={Dashboard} />
-              <Route path="/leaderboard" component={Leaderboard} />
-              <Route path="/new" component={NewQuestion} />
-            </div>
-          )}
+          <Switch>
+            <Route path="/login" component={Login} />
+            <ProtectedRoute path="/leaderboard" component={Leaderboard} />
+            <ProtectedRoute path="/questions/:id" component={QuestionPage} />
+            <ProtectedRoute path="/new" component={NewQuestion} />
+            <ProtectedRoute exact path="/" component={Dashboard} />
+          </Switch>
         </div>
       </BrowserRouter>
     );
   }
 }
 
-function mapStateToProps({ authUser, users, questions }) {
+function mapStateToProps({ users, questions }) {
   return {
-    authUser,
     userIds: Object.keys(users),
     questionIds: Object.keys(questions),
   };

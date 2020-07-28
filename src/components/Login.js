@@ -5,6 +5,7 @@ import User from "./UserListItem";
 
 export class Login extends Component {
   render() {
+    const { pathname: referrer } = this.props.location.state.from;
     const { userIds } = this.props;
     return (
       <Row className="container center">
@@ -12,7 +13,7 @@ export class Login extends Component {
         <Col s={6} className="offset-s3">
           <Collection>
             {userIds.map((id) => (
-              <User key={id} id={id} />
+              <User key={id} id={id} referrer={referrer} />
             ))}
           </Collection>
         </Col>

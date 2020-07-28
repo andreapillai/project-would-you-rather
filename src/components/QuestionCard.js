@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardTitle, Collection, CollectionItem } from "react-materialize";
 import { handleSaveAnswer } from "../actions/shared";
+import { Link } from "react-router-dom";
 
 export class QuestionCard extends Component {
   render() {
@@ -55,7 +56,11 @@ export class QuestionCard extends Component {
             {question.optionTwo.text}
           </CollectionItem>
         </Collection>
-        {answered && <button className="btn indigo">View Results</button>}
+        {answered && (
+          <Link to={`/questions/${question.id}`}>
+            <button className="btn indigo">View Results</button>
+          </Link>
+        )}
       </Card>
     );
   }
