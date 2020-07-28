@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Tabs, Tab, Row, Col } from "react-materialize";
+import {
+  Tabs,
+  Tab,
+  Row,
+  Col,
+  CollectionItem,
+  Collection,
+} from "react-materialize";
 import { Link } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
 
@@ -10,6 +17,13 @@ export class Dashboard extends Component {
     return (
       <div>
         <h1 className="center">Dashboard</h1>
+        {/* <Collection>
+          {answeredQuestions.map((q) => (
+            <CollectionItem key={q.id}>
+              {q.id} - {q.timestamp}
+            </CollectionItem>
+          ))}
+        </Collection> */}
         <Tabs className="tab-demo z-depth-1 tabs-fixed-width">
           <Tab
             active
@@ -64,12 +78,12 @@ export class Dashboard extends Component {
 
 const mapStateToProps = ({ authUser, users, questions }) => {
   const answeredQuestionIds = Object.keys(users[authUser].answers);
-  const answeredQuestions = Object.values(questions).filter((question) =>
-    answeredQuestionIds.includes(question.id)
-  );
-  const unansweredQuestions = Object.values(questions).filter(
-    (question) => !answeredQuestionIds.includes(question.id)
-  );
+  const answeredQuestions = Object.values(questions)
+    .filter((question) => answeredQuestionIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
+  const unansweredQuestions = Object.values(questions)
+    .filter((question) => !answeredQuestionIds.includes(question.id))
+    .sort((a, b) => b.timestamp - a.timestamp);
   return {
     answeredQuestions,
     unansweredQuestions,
