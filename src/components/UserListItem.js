@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 
 export class User extends Component {
   render() {
-    console.log(this.props);
     const { dispatch, user, referrer } = this.props;
     return (
       <CollectionItem

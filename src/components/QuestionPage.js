@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-// import { QuestionCard } from "./QuestionCard";
+import { QuestionCard } from "./QuestionCard";
 
 export class QuestionPage extends Component {
   render() {
-    console.log(this.props);
     const { id } = this.props.match.params;
     return (
       <div>
