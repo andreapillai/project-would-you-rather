@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  Tabs,
-  Tab,
-  Row,
-  Col,
-  CollectionItem,
-  Collection,
-} from "react-materialize";
+import { Tabs, Tab, Row, Col } from "react-materialize";
 import { Link } from "react-router-dom";
 import QuestionCard from "./QuestionCard";
 
@@ -17,13 +10,6 @@ export class Dashboard extends Component {
     return (
       <div>
         <h1 className="center">Dashboard</h1>
-        {/* <Collection>
-          {answeredQuestions.map((q) => (
-            <CollectionItem key={q.id}>
-              {q.id} - {q.timestamp}
-            </CollectionItem>
-          ))}
-        </Collection> */}
         <Tabs className="tab-demo z-depth-1 tabs-fixed-width">
           <Tab
             active
