@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { handleInitialData } from "./../actions/shared";
 import NavBar from "./NavBar";
 import Login from "./Login";
@@ -9,6 +9,7 @@ import Leaderboard from "./Leaderboard";
 import NewQuestion from "./NewQuestion";
 import QuestionPage from "./QuestionPage";
 import ProtectedRoute from "./ProtectedRoute";
+import NotFound from "./NotFound";
 
 export class App extends Component {
   componentDidMount() {
@@ -20,13 +21,17 @@ export class App extends Component {
       <BrowserRouter>
         <div>
           <NavBar />
-          <Switch>
-            <Route path="/login" component={Login} />
-            <ProtectedRoute path="/leaderboard" component={Leaderboard} />
-            <ProtectedRoute path="/questions/:id" component={QuestionPage} />
-            <ProtectedRoute path="/new" component={NewQuestion} />
-            <ProtectedRoute exact path="/" component={Dashboard} />
-          </Switch>
+          <div className="container">
+            <Switch>
+              <Route path="/login" component={Login} />
+              <ProtectedRoute path="/not-found" component={NotFound} />
+              <ProtectedRoute path="/leaderboard" comp={Leaderboard} />
+              <ProtectedRoute path="/questions/:id" comp={QuestionPage} />
+              <ProtectedRoute path="/new" comp={NewQuestion} />
+              <ProtectedRoute exact path="/" comp={Dashboard} />
+              <Redirect to="/not-found" />
+            </Switch>
+          </div>
         </div>
       </BrowserRouter>
     );

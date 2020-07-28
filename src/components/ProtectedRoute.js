@@ -20,7 +20,7 @@ class ProtectedRoute extends Component {
   }
 }
 
-function mapStateToProps({ authUser }, { component: Component, ...rest }) {
+function mapStateToProps({ authUser }, { comp: Component, ...rest }) {
   return { authUser, Component, ...rest };
 }
 
