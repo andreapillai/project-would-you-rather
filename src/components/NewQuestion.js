@@ -17,8 +17,10 @@ export class NewQuestion extends Component {
     const { optionOne, optionTwo } = this.state;
     dispatch(handleAddNewQuestion(optionOne, optionTwo, authUser));
     this.setState({ optionOne: "", optionTwo: "" });
+    this.props.history.push("/");
   };
   render() {
+    console.log(this.props);
     return (
       <div className="center">
         <h3>Add a new Question</h3>
