@@ -12,24 +12,24 @@ export default function users(state = {}, action) {
         ...action.users,
       };
     case ADD_ANSWER_TO_USER:
+      const { authUser, question, answer } = action;
       return {
         ...state,
-        [action.authUser]: {
+        [authUser]: {
           ...state[action.authUser],
           answers: {
-            ...state[action.authUser].answers,
-            [action.question]: action.answer,
+            ...state[authUser].answers,
+            [question]: answer,
           },
         },
       };
     case ADD_QUESTION_TO_USER:
+      const { author, id } = action.question;
       return {
         ...state,
-        [action.question.author]: {
-          ...state[action.question.author],
-          questions: state[action.question.author].questions.concat(
-            action.question.id
-          ),
+        [author]: {
+          ...state[author],
+          questions: state[author].questions.concat(id),
         },
       };
     default:
