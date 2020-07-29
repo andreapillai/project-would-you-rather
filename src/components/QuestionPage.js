@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Card, Collection, CollectionItem } from "react-materialize";
+import { Card, Collection, CollectionItem, Icon } from "react-materialize";
 import { CardTitle } from "react-materialize";
 
 export class QuestionPage extends Component {
@@ -9,7 +9,8 @@ export class QuestionPage extends Component {
     return optionOnevotes > optionTwovotes ? "optionOne" : "optionTwo";
   };
   render() {
-    const { question, author } = this.props;
+    const { question, author, userAnswer } = this.props;
+    console.log(userAnswer);
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
     const winner = this.calculateWinner(optionOneVotes, optionTwoVotes);
@@ -33,22 +34,28 @@ export class QuestionPage extends Component {
           </CollectionItem>
           <CollectionItem
             className={
-              winner === "tie" || winner === "optionOne"
+              userAnswer === "tie" || userAnswer === "optionOne"
                 ? "indigo lighten-4"
                 : ""
             }
           >
             {`${question.optionOne.text} - VOTES: ${optionOneVotes} - ${optionOnePercent}% of votes.`}
+            {winner === "tie" || winner === "optionOne" ? (
+              <Icon className="right yellow-text">star</Icon>
+            ) : null}
           </CollectionItem>
           <CollectionItem>- or -</CollectionItem>
           <CollectionItem
             className={
-              winner === "tie" || winner === "optionTwo"
+              userAnswer === "tie" || userAnswer === "optionTwo"
                 ? "indigo lighten-4"
                 : ""
             }
           >
             {`${question.optionTwo.text} - VOTES: ${optionTwoVotes} - ${optionTwoPercent}% of votes.`}
+            {winner === "tie" || winner === "optionTwo" ? (
+              <Icon className="right yellow-text">star</Icon>
+            ) : null}
           </CollectionItem>
         </Collection>
       </Card>
@@ -60,6 +67,7 @@ function mapStateToProps({ authUser, users, questions }, { match }) {
   return {
     question: questions[match.params.id],
     author: users[questions[match.params.id].author],
+    userAnswer: users[authUser].answers[match.params.id] || null,
   };
 }
 
