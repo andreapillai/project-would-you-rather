@@ -24,7 +24,7 @@ export class App extends Component {
           <div className="container">
             <Switch>
               <Route path="/login" component={Login} />
-              <ProtectedRoute path="/not-found" component={NotFound} />
+              <ProtectedRoute path="/not-found" comp={NotFound} />
               <ProtectedRoute path="/leaderboard" comp={Leaderboard} />
               <ProtectedRoute path="/questions/:id" comp={QuestionPage} />
               <ProtectedRoute path="/add" comp={NewQuestion} />
