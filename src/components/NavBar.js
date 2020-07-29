@@ -33,7 +33,7 @@ export class NavBar extends Component {
       >
         <NavLink to="/">Dashboard</NavLink>
         <NavLink to="/leaderboard">Leaderboard</NavLink>
-        <NavLink to="/new">New Question</NavLink>
+        <NavLink to="/add">New Question</NavLink>
         {authUser && (
           <button
             className="btn indigo"

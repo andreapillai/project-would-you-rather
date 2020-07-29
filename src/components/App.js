@@ -27,7 +27,7 @@ export class App extends Component {
               <ProtectedRoute path="/not-found" component={NotFound} />
               <ProtectedRoute path="/leaderboard" comp={Leaderboard} />
               <ProtectedRoute path="/questions/:id" comp={QuestionPage} />
-              <ProtectedRoute path="/new" comp={NewQuestion} />
+              <ProtectedRoute path="/add" comp={NewQuestion} />
               <ProtectedRoute exact path="/" comp={Dashboard} />
               <Redirect to="/not-found" />
             </Switch>
