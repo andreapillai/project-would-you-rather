@@ -20,7 +20,6 @@ export class NewQuestion extends Component {
     this.props.history.push("/");
   };
   render() {
-    console.log(this.props);
     return (
       <div className="center">
         <h3>Add a new Question</h3>
