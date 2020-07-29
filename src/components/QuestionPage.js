@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Collection, CollectionItem, Icon } from "react-materialize";
 import { CardTitle } from "react-materialize";
+import { Link } from "react-router-dom";
 
 export class QuestionPage extends Component {
   calculateWinner = (optionOnevotes, optionTwovotes) => {
@@ -10,7 +11,6 @@ export class QuestionPage extends Component {
   };
   render() {
     const { question, author, userAnswer } = this.props;
-    console.log(userAnswer);
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
     const winner = this.calculateWinner(optionOneVotes, optionTwoVotes);
@@ -31,11 +31,7 @@ export class QuestionPage extends Component {
             {`Would you Rather... ?`}
           </CollectionItem>
           <CollectionItem
-            className={
-              userAnswer === "tie" || userAnswer === "optionOne"
-                ? "indigo lighten-4"
-                : ""
-            }
+            className={userAnswer === "optionOne" ? "indigo lighten-4" : ""}
           >
             {`${question.optionOne.text} - VOTES: ${optionOneVotes} - ${optionOnePercent}% of votes.`}
             {winner === "tie" || winner === "optionOne" ? (
@@ -44,11 +40,7 @@ export class QuestionPage extends Component {
           </CollectionItem>
           <CollectionItem>- or -</CollectionItem>
           <CollectionItem
-            className={
-              userAnswer === "tie" || userAnswer === "optionTwo"
-                ? "indigo lighten-4"
-                : ""
-            }
+            className={userAnswer === "optionTwo" ? "indigo lighten-4" : ""}
           >
             {`${question.optionTwo.text} - VOTES: ${optionTwoVotes} - ${optionTwoPercent}% of votes.`}
             {winner === "tie" || winner === "optionTwo" ? (
@@ -56,6 +48,12 @@ export class QuestionPage extends Component {
             ) : null}
           </CollectionItem>
         </Collection>
+        {!userAnswer && (
+          <p className="flow-text">
+            You have not answered this question yet. You will find it in your{" "}
+            <Link to="/">Dashboard</Link>
+          </p>
+        )}
       </Card>
     );
   }
