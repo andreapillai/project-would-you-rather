@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Collection, CollectionItem, Icon } from "react-materialize";
 import { CardTitle } from "react-materialize";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export class QuestionPage extends Component {
   calculateWinner = (optionOnevotes, optionTwovotes) => {
     if (optionOnevotes === optionTwovotes) return "tie";
     return optionOnevotes > optionTwovotes ? "optionOne" : "optionTwo";
   };
+
   render() {
+    if (this.props.question === null) return <Redirect to="/not-found" />;
+
     const { question, author, userAnswer } = this.props;
     const optionOneVotes = question.optionOne.votes.length;
     const optionTwoVotes = question.optionTwo.votes.length;
@@ -17,6 +20,7 @@ export class QuestionPage extends Component {
     const totalVotes = optionOneVotes + optionTwoVotes;
     const optionOnePercent = Math.round((optionOneVotes * 100) / totalVotes);
     const optionTwoPercent = Math.round((optionTwoVotes * 100) / totalVotes);
+
     return (
       <Card
         header={<CardTitle image={author.avatarURL} />}
@@ -50,8 +54,9 @@ export class QuestionPage extends Component {
         </Collection>
         {!userAnswer && (
           <p className="flow-text">
-            You have not answered this question yet. You will find it in your{" "}
-            <Link to="/">Dashboard</Link>
+            You have not answered this question yet.
+            <br />
+            You will find it in your <Link to="/">Dashboard</Link>
           </p>
         )}
       </Card>
@@ -60,10 +65,11 @@ export class QuestionPage extends Component {
 }
 
 function mapStateToProps({ authUser, users, questions }, { match }) {
+  const question = questions[match.params.id] || null;
   return {
-    question: questions[match.params.id],
-    author: users[questions[match.params.id].author],
-    userAnswer: users[authUser].answers[match.params.id] || null,
+    question,
+    author: question !== null ? users[questions[match.params.id].author] : null,
+    userAnswer: users[authUser].answers[match.params.id],
   };
 }
 
