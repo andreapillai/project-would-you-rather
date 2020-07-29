@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Card, CardTitle, Collection, CollectionItem } from "react-materialize";
 import { handleSaveAnswer } from "../actions/shared";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 export class QuestionCard extends Component {
   render() {
@@ -33,6 +34,7 @@ export class QuestionCard extends Component {
                     dispatch(
                       handleSaveAnswer(authUser, question.id, "optionOne")
                     );
+                    this.props.history.push(`/questions/${question.id}`);
                   }
                 : null
             }
@@ -48,6 +50,7 @@ export class QuestionCard extends Component {
                     dispatch(
                       handleSaveAnswer(authUser, question.id, "optionTwo")
                     );
+                    this.props.history.push(`/questions/${question.id}`);
                   }
                 : null
             }
@@ -77,4 +80,4 @@ const mapStateToProps = ({ questions, users, authUser }, { id, answered }) => {
   };
 };
 
-export default connect(mapStateToProps)(QuestionCard);
+export default withRouter(connect(mapStateToProps)(QuestionCard));
