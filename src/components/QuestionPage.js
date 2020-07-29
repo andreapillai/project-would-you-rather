@@ -19,9 +19,7 @@ export class QuestionPage extends Component {
     const optionTwoPercent = Math.round((optionTwoVotes * 100) / totalVotes);
     return (
       <Card
-        header={
-          <CardTitle image="https://materializecss.com/images/sample-1.jpg" />
-        }
+        header={<CardTitle image={author.avatarURL} />}
         horizontal
         className="center"
       >
